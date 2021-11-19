@@ -1,0 +1,35 @@
+<div *ngIf="peliculaDetalles">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="card" style="width:100%;">
+        <img src="{{peliculaDetalles.foto}}" style="width: 300px;" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{peliculaDetalles.titulo}}</h5>
+          <p class="card-text">{{peliculaDetalles.argumento}}</p>
+          <div *ngIf="genero">
+            <h5 class="card-title">GENERO: {{genero.nombre}}</h5>
+          </div>
+          <div *ngIf="nacionalidad">
+              <h5 class="card-title">NACIONALIDAD: {{nacionalidad.nombre}}</h5>
+          </div>
+
+          <h5 class="mt-2 mb-2 text-warning card-title">Cambiar genero</h5>
+          <select (change)="cambiarPeliGenero()" *ngIf="generos" class="form-select" 
+          name="selectGenero" #selectGenero>
+            <option *ngFor="let g of generos" value="{{g.idGenero}}">
+                {{g.nombre}}            
+            </option>
+          </select> 
+          <button (click)="eliminarPeli(peliculaDetalles.idPelicula)" class="m-2 btn btn-danger">
+            Eliminar
+          </button>
+          <p>
+            <iframe width="560" height="315" [src]="getVideoIframe(peliculaDetalles.enlaceVideo)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </p>            
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
